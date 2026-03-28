@@ -11,23 +11,24 @@ public class A_Unit_Array {
             int n = sc.nextInt();
 
             int negatives = 0;
-            int sum = 0;
             int[] arr = new int[n];
 
             for (int i = 0; i < n; i++) {
                 arr[i] = sc.nextInt();
                 negatives = arr[i] < 0 ? negatives + 1 : negatives;
-                sum += arr[i];
             }
 
             int postives = n - negatives;
+            int count = 0;
 
-            if (negatives % 2 == 0 && postives != 0) {
-                System.out.println(0);
-            } else {
-                int res = Math.min(Math.abs(negatives - postives), Math.abs(sum));
-                System.out.println(res);
+            while(negatives > postives || negatives % 2 == 1) {
+                postives++;
+                negatives--;
+                count++;
             }
+
+            System.out.println(count);
+
 
         }
 

@@ -8,10 +8,16 @@ public class A_How_Much_Does_Daytona_Cost {
         int t = sc.nextInt();
         while (t-- > 0) {
             int n = sc.nextInt(), k = sc.nextInt();
-            int[] arr = new int[n];
+            HashSet<Integer> set = new HashSet<>();
 
             for (int i = 0; i < n; i++) {
-                arr[i] = sc.nextInt();
+                set.add(sc.nextInt());
+            }
+
+            if(set.contains(k)) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
             }
 
         }
