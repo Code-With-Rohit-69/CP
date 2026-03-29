@@ -13,14 +13,9 @@ public class A_Yet_Another_Two_Integers_Problem {
 
             int diff = Math.abs(a - b);
 
-            while (diff >= 10) {
-                diff -= 10;
-                count++;
-            }
+            count = diff / 10;
 
-            if (diff > 0) {
-                count++;
-            }
+            if(diff % 10 != 0) count++;
 
             System.out.println(count);
         }
