@@ -12,30 +12,19 @@ public class C_Vasilije_in_Cacak {
             long k = sc.nextLong();
             long x = sc.nextLong();
 
-            long half = n / 2;
+            long minSum = k * (k + 1) / 2;
+            long remaining = n - k;
 
-            if(half < x) {
-                for (long i = n; i >= 1 && k > 0 && x > 0; i--) {
-                    if(x >= i) {
-                        x -= i;
-                        k--;
-                    }
-                }
-            } else {
-                for (long i = 1; i <= n && k > 0 && x > 0; i++) {
-                    if(x >= i) {
-                        x -= i;
-                        k--;
-                    }
-                }
-            }
+            long remainingSum = remaining * (remaining + 1) / 2;
 
+            long maxSum = (n * (n + 1) / 2 ) - remainingSum;
 
-            if (x == 0) {
+            if (x >= minSum && x <= maxSum) {
                 System.out.println("YES");
             } else {
                 System.out.println("NO");
             }
+            
 
 
         }
