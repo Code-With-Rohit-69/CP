@@ -8,9 +8,9 @@ public class A_Buttons {
         int t = sc.nextInt();
 
         while (t-- > 0) {
-            int a = sc.nextInt(), b = sc.nextInt(), c = sc.nextInt();
+            long a = sc.nextInt(), b = sc.nextInt(), c = sc.nextInt();
 
-            int sum = a + b + c;
+            long sum = a + b + c;
 
             if ((sum & 1) != 0) {
                 System.out.println("First");
