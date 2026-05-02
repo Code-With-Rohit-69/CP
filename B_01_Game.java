@@ -16,15 +16,16 @@ public class B_01_Game {
                 }
             }
             int one = s.length() - zero;
-            if (zero == one) {
-                if (zero % 2 == 0) {
-                    System.out.println("NET");
-                } else {
-                    System.out.println("DA");
-                }
+
+            int min = Math.min(zero, one);
+
+            
+            if (min % 2 == 1) {
+                System.out.println("DA");
             } else {
                 System.out.println("NET");
             }
+
         }
 
         sc.close();
