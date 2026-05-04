@@ -9,15 +9,28 @@ public class B_Not_Dividing {
 
         while (t-- > 0) {
             int n = sc.nextInt();
+            
             int[] arr = new int[n];
             for (int i = 0; i < n; i++) {
                 arr[i] = sc.nextInt();
             }
-            int val = 2;
-            for (int i = 0; i < n; i++) {
-                System.out.print(val + " ");
-                val++;
+
+            for (int i = 0; i < n - 1; i++) {
+                if (arr[i] == 1) {
+                    arr[i] += 1;
+                }
             }
+
+            for (int i = 0; i < n - 1; i++) {
+                if (arr[i + 1] % arr[i] == 0) {
+                    arr[i + 1]++;
+                }
+            }
+
+            for (int i = 0; i < n; i++) {
+                System.out.print(arr[i] + " ");
+            }
+
             System.out.println();
         }
 
