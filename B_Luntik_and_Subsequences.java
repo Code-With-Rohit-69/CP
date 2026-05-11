@@ -2,7 +2,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class B_Luntik_and_Subsequences {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -36,8 +35,6 @@ public class B_Luntik_and_Subsequences {
             }
 
             System.out.println(count);
-
-
         }
 
         sc.close();
