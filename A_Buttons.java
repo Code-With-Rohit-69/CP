@@ -10,12 +10,23 @@ public class A_Buttons {
         while (t-- > 0) {
             long a = sc.nextInt(), b = sc.nextInt(), c = sc.nextInt();
 
-            long sum = a + b + c;
+            if((c & 1) != 0) {
+                // Anna
 
-            if ((sum & 1) != 0) {
-                System.out.println("First");
+                if (a >= b) {
+                    System.out.println("First");
+                } else {
+                    System.out.println("Second");
+                }
             } else {
-                System.out.println("Second");
+                // katie
+
+                if (b >= a) {
+                    System.out.println("Second");
+                } else {
+                    System.out.println("First");
+                }
+
             }
 
         }

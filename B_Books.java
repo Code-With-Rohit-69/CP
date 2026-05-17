@@ -1,38 +1,37 @@
-    import java.util.*;
+        import java.util.*;
 
-    public class B_Books {
+        public class B_Books {
 
-        public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
+            public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
 
-            int n = sc.nextInt(), t = sc.nextInt();
+                int n = sc.nextInt(), t = sc.nextInt();
 
-            int[] arr = new int[n];
+                int[] arr = new int[n];
 
-            for (int i = 0; i < n; i++) {
-                arr[i] = sc.nextInt();
-            }
-
-            int mid = n / 2;
-            int count = 0;
-
-            for (int i = mid; i < n; i++) {
-                if(arr[i] <= t) {
-                    count++;
-                    t -= arr[i];
+                for (int i = 0; i < n; i++) {
+                    arr[i] = sc.nextInt();
                 }
+
+                int max = 0;
+                int left = 0;
+
+                int curr = 0;
+
+                for(int i = 0; i < n; i++) {
+                    curr += arr[i];
+
+                    while(curr > t && left <= i) {
+                        curr -= arr[left];
+                        left++;
+                    }
+
+                    max = Math.max(i - left + 1, max);
+
+                }
+
+                System.out.println(max);
+
+                sc.close();
             }
-
-            mid -= 1;
-
-            while (mid >= 0 && arr[mid] <= t && t > 0) {
-                count++;
-                t -= arr[mid];  
-                mid--;
-            }
-
-            System.out.println(count);
-
-            sc.close();
         }
-    }
