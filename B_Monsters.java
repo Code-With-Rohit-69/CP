@@ -1,7 +1,9 @@
-import java.util.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.PriorityQueue;
 
-public class C_Raspberries {
+public class B_Monsters {
 
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
@@ -13,79 +15,37 @@ public class C_Raspberries {
             int n = fr.nextInt();
             int k = fr.nextInt();
 
-            int[] arr = new int[n];
-            // long product = 1L;
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+                if (a[1] == b[1]) {
+                    return Integer.compare(a[0], b[0]);
+                }
 
-            int evens = 0;
-            int fives = 0;
+                return Integer.compare(b[1], a[1]);
+            });
 
             for (int i = 0; i < n; i++) {
-                arr[i] = fr.nextInt();
-                if ((arr[i] & 1) == 0)
-                    evens++;
-                if (arr[i] % 5 == 0)
-                    fives++;
+                int num = fr.nextInt();
 
-                // product *= arr[i];
+                num = num % k;
+
+                if(num == 0) num = k;
+
+                pq.add(new int[] { i, num });
             }
 
-            if (k == 2) {
-                out.println(evens > 0 ? 0 : 1);
-                continue;
+            while (!pq.isEmpty()) {
+                int[] curr = pq.remove();
+
+                int index = curr[0], val = curr[1];
+                out.print(index + 1 + " ");
             }
 
-            if (k == 5 && fives > 0) {
-                out.println(0);
-                continue;
-            }
-
-            if (k == 5) {
-                int min = (int) (1e9);
-
-                for (int i = 0; i < n; i++) {
-                    min = Math.min(min, 5 - (arr[i] % 5));
-                }
-
-                out.println(min);
-                continue;
-            }
-
-            if (k == 3) {
-
-                int min = (int) (1e9);
-                for (int i = 0; i < n; i++) {
-                    int rem = arr[i] % 3;
-                    int opNeeded = (rem == 0) ? 0 : (3 - rem);
-                    min = Math.min(min, opNeeded);
-                }
-                out.println(min);
-
-                continue;
-            }
-
-            if (k == 4) {
-
-                int min = (int) (1e9);
-
-                for (int i = 0; i < n; i++) {
-                    min = Math.min(min, (4 - (arr[i] % 4)) % 4);
-                }
-
-                if (evens >= 2) {
-                    out.println(0);
-                    continue;
-                } else if (evens == 1) {
-                    min = Math.min(1, min);
-                } else {
-                    min = Math.min(2, min);
-                }
-
-                out.println(min);
-            }
+            out.println();
 
         }
 
         out.flush();
+
     }
 }
 
