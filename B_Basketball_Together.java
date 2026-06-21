@@ -1,44 +1,51 @@
+import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B_Basketball_Together {
 
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
         PrintWriter out = new PrintWriter(System.out);
 
-        int R = fr.nextInt();
-        char C = fr.next().charAt(0);
-        int index = C - 'A';
+        int N = fr.nextInt();
+        int D = fr.nextInt();
 
-        boolean valid = false;
+        int[] arr = new int[N];
 
-        for (int i = 0; i < R; i++) {
-            String s = fr.next();
+        for (int i = 0; i < N; i++) {
+            arr[i] = fr.nextInt();
+        }
 
-            if (s.charAt(index) != 'x') {
-                valid = true;
+        Arrays.sort(arr);
+
+        int count = 0;
+
+        int i = 0;
+        int j = N - 1;
+
+        while (i <= j) {
+            // System.out.println("i: " + i + " j: " + j);
+            int max = arr[j];
+
+            int needed = (D / max) + 1;
+            int extraPlayersNeeded = needed - 1;
+
+            if (j - i >= extraPlayersNeeded) {
+                count++;
+                i += extraPlayersNeeded;
+            } else {
+                break;
             }
+
+            j--;
 
         }
 
-        System.out.println(valid ? "Yes" : "No");
+        out.println(count);
 
         out.flush();
     }
 }
-
-.##
-.##
-... 
-
-/*
-
-    ..##
-    #..#
-    ##..
-    ###.
-
-*/
 
 class FastReader {
     private final InputStream in = System.in;
@@ -58,7 +65,8 @@ class FastReader {
     int nextInt() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -76,7 +84,8 @@ class FastReader {
     long nextLong() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -94,7 +103,8 @@ class FastReader {
     String next() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return null;
+            if (c == -1)
+                return null;
         }
         StringBuilder sb = new StringBuilder();
         while (c > ' ') {
@@ -107,7 +117,8 @@ class FastReader {
     double nextDouble() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
