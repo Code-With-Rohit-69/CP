@@ -1,48 +1,54 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-    static FastReader fr;
-    static PrintWriter out;
+/**
+ * C_Yarik_and_Array
+ */
 
-    public static void solve() throws IOException {
-        int n = fr.nextInt();
-        int k = fr.nextInt();
+public class C_Yarik_and_Array {
 
-        int res = 0;
-        int freq = 0;
+    public static int solve(int[] arr) {
+        int maxSoFar = arr[0];
+        int currentMax = arr[0];
 
-        int i = 1;
-        int sum = 0;
+        for (int i = 1; i < arr.length; i++) {
+            currentMax += arr[i];
 
-        while (sum <= n && i <= k) {
-            sum += i;
-
-            int c = Integer.bitCount(sum);
-            if(c > freq) {
-                freq = c;
-                res = i;
+            if (currentMax < arr[i] || (Math.abs(arr[i - 1]) % 2 == Math.abs(arr[i] % 2))) {
+                currentMax = arr[i];
             }
 
-            i++;    
+            maxSoFar = Math.max(maxSoFar, currentMax);
         }
 
-        out.println(freq * k);
+        return maxSoFar;
     }
 
     public static void main(String[] args) throws IOException {
-        fr = new FastReader();
-        out = new PrintWriter(System.out);
+        FastReader fr = new FastReader();
+        PrintWriter out = new PrintWriter(System.out);
 
         int t = fr.nextInt();
 
         while (t-- > 0) {
-            solve();
+            int n = fr.nextInt();
+            int[] arr = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = fr.nextInt();
+            }
+
+            int res = solve(arr);
+
+            out.println(res);
         }
 
         out.flush();
+
     }
 }
+
+// 18 + 16 = 34
 
 class FastReader {
     private final InputStream in = System.in;
@@ -62,7 +68,8 @@ class FastReader {
     int nextInt() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -80,7 +87,8 @@ class FastReader {
     long nextLong() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -98,7 +106,8 @@ class FastReader {
     String next() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return null;
+            if (c == -1)
+                return null;
         }
         StringBuilder sb = new StringBuilder();
         while (c > ' ') {
@@ -111,7 +120,8 @@ class FastReader {
     double nextDouble() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {

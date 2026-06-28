@@ -1,48 +1,62 @@
-import java.io.*;
+/**
+ * B_Maximum_Sum
+ */
+
 import java.util.*;
+import java.io.*;
 
-public class Main {
-    static FastReader fr;
-    static PrintWriter out;
-
-    public static void solve() throws IOException {
-        int n = fr.nextInt();
-        int k = fr.nextInt();
-
-        int res = 0;
-        int freq = 0;
-
-        int i = 1;
-        int sum = 0;
-
-        while (sum <= n && i <= k) {
-            sum += i;
-
-            int c = Integer.bitCount(sum);
-            if(c > freq) {
-                freq = c;
-                res = i;
-            }
-
-            i++;    
-        }
-
-        out.println(freq * k);
-    }
+public class B_Maximum_Sum {
 
     public static void main(String[] args) throws IOException {
-        fr = new FastReader();
-        out = new PrintWriter(System.out);
+        
+        FastReader fr = new FastReader();
+        PrintWriter out = new PrintWriter(System.out);
 
         int t = fr.nextInt();
 
         while (t-- > 0) {
-            solve();
+            int n = fr.nextInt();
+            int k = fr.nextInt();
+
+            int[] arr = new int[n];
+            long[] prefix = new long[n + 1];
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = fr.nextInt();
+            }
+
+            Arrays.sort(arr);
+
+            for (int i = 0; i < n; i++) {
+                prefix[i + 1] = arr[i] + prefix[i];
+            }
+            
+            long sum = 0;
+
+            for (int i = 0; i <= k; i++) {
+                int left = 2 * i;
+                int right = k - i;
+
+                int rightIndex = n - 1 - right;
+
+                sum = Math.max(sum, prefix[rightIndex + 1] - prefix[left]);
+            }
+
+            out.println(sum);
+
         }
 
         out.flush();
+
     }
 }
+
+// 10 11 12 13 15 22
+// sum = 83
+// k = 2
+
+// 83 - 21 = 62
+// 62 - 22 = 40
 
 class FastReader {
     private final InputStream in = System.in;

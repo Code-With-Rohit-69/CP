@@ -1,43 +1,36 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-    static FastReader fr;
-    static PrintWriter out;
-
-    public static void solve() throws IOException {
-        int n = fr.nextInt();
-        int k = fr.nextInt();
-
-        int res = 0;
-        int freq = 0;
-
-        int i = 1;
-        int sum = 0;
-
-        while (sum <= n && i <= k) {
-            sum += i;
-
-            int c = Integer.bitCount(sum);
-            if(c > freq) {
-                freq = c;
-                res = i;
-            }
-
-            i++;    
-        }
-
-        out.println(freq * k);
-    }
+/**
+ * B_Erase_First_or_Second_Letter
+ */
+public class B_Erase_First_or_Second_Letter {
 
     public static void main(String[] args) throws IOException {
-        fr = new FastReader();
-        out = new PrintWriter(System.out);
+        FastReader fr = new FastReader();
+        PrintWriter out = new PrintWriter(System.out);
 
         int t = fr.nextInt();
 
         while (t-- > 0) {
-            solve();
+            int n = fr.nextInt();
+            String s = fr.next();
+
+            long count = 0L;
+            boolean[] vis = new boolean[26];
+
+            for (int i = 0; i < n; i++) {
+                int index = s.charAt(i) - 'a';
+
+                if (!vis[index]) {
+                    vis[index] = true;
+                    count += (n - i);
+                }
+
+            }
+
+            System.out.println(count);
+
         }
 
         out.flush();
