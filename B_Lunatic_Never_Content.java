@@ -1,64 +1,58 @@
 import java.io.*;
-import java.util.*;
 
-public class A_Counting_Orders {
-    
+/**
+ * B_Lunatic_Never_Content
+ */
+
+public class B_Lunatic_Never_Content {
+
+    public static long gcd(long a, long b) {
+        while (b != 0) {
+            long temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        return a;
+    }
+
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
         PrintWriter out = new PrintWriter(System.out);
 
         int t = fr.nextInt();
-        int MOD = (int) (1e9 + 7);
 
         while (t-- > 0) {
             int n = fr.nextInt();
 
-            int[] a = new int[n];
-            int[] b = new int[n];
+            long[] arr = new long[n];
 
             for (int i = 0; i < n; i++) {
-                a[i] = fr.nextInt();
+                arr[i] = fr.nextLong();
             }
 
-            for (int i = 0; i < n; i++) {
-                b[i] = fr.nextInt();
+            int i = 0, j = n - 1;
+            long x = 0;
+
+            while (i < j) {
+
+                long diff = Math.abs(arr[i] - arr[j]);
+
+                x = gcd(x, diff);
+
+                i++;
+                j--;
             }
 
-            Arrays.sort(a);
-            Arrays.sort(b);
-
-            long count = 1;
-            int index = n - 1;
-
-            for(int i = n - 1; i >= 0; i--) {
-
-                while (index >= 0 && a[index] > b[i]) {
-                    index--;
-                }
-
-                int available = n - 1 - index;
-                int used = n - 1 - i;
-
-                count = (count * (available - used)) % MOD;
-
-            }
-
-            out.println(count);
+            out.println(x);
 
         }
 
         out.flush();
-
     }
+
 }
 
-/*
-  - 0 1 2 3 4 5
-
-    2 4 5 6 8 9
-    1 1 3 4 5 6
-
-*/
 
 class FastReader {
     private final InputStream in = System.in;
@@ -149,7 +143,6 @@ class FastReader {
         return num * sign;
     }
 }
-
 
 /*
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣠⢴⣤⣶⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

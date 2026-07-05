@@ -1,49 +1,71 @@
 import java.io.*;
-import java.util.*;
 
-public class A_Counting_Orders {
-    
+/**
+ * C_Paint_the_Array
+ */
+
+public class C_Paint_the_Array {
+
+    public static long gcd(long a, long b) {
+        while (b != 0) {
+            long temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
         PrintWriter out = new PrintWriter(System.out);
 
         int t = fr.nextInt();
-        int MOD = (int) (1e9 + 7);
 
         while (t-- > 0) {
             int n = fr.nextInt();
 
-            int[] a = new int[n];
-            int[] b = new int[n];
+            long[] arr = new long[n];
 
             for (int i = 0; i < n; i++) {
-                a[i] = fr.nextInt();
+                arr[i] = fr.nextLong();
             }
 
-            for (int i = 0; i < n; i++) {
-                b[i] = fr.nextInt();
+            boolean valid = true;
+
+            long even = 0;
+
+            for (int i = 0; i < n; i += 2) {
+                even = gcd(even, (long) arr[i]);
             }
 
-            Arrays.sort(a);
-            Arrays.sort(b);
-
-            long count = 1;
-            int index = n - 1;
-
-            for(int i = n - 1; i >= 0; i--) {
-
-                while (index >= 0 && a[index] > b[i]) {
-                    index--;
+            for (int i = 1; i < n; i += 2) {
+                if (arr[i] % even == 0) {
+                    valid = false;
+                    break;
                 }
-
-                int available = n - 1 - index;
-                int used = n - 1 - i;
-
-                count = (count * (available - used)) % MOD;
-
             }
 
-            out.println(count);
+            if (valid) {
+                out.println(even);
+                continue;
+            }
+
+            valid = true;
+
+            long odd = 0;
+
+            for (int i = 1; i < n; i += 2) {
+                odd = gcd(odd, (long) arr[i]);
+            }
+
+            for (int i = 0; i < n; i += 2) {
+                if (arr[i] % odd == 0) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            out.println(valid ? odd : 0);
 
         }
 
@@ -51,14 +73,6 @@ public class A_Counting_Orders {
 
     }
 }
-
-/*
-  - 0 1 2 3 4 5
-
-    2 4 5 6 8 9
-    1 1 3 4 5 6
-
-*/
 
 class FastReader {
     private final InputStream in = System.in;
@@ -78,7 +92,8 @@ class FastReader {
     int nextInt() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -96,7 +111,8 @@ class FastReader {
     long nextLong() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -114,7 +130,8 @@ class FastReader {
     String next() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return null;
+            if (c == -1)
+                return null;
         }
         StringBuilder sb = new StringBuilder();
         while (c > ' ') {
@@ -127,7 +144,8 @@ class FastReader {
     double nextDouble() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1) return -1;
+            if (c == -1)
+                return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -149,7 +167,6 @@ class FastReader {
         return num * sign;
     }
 }
-
 
 /*
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣠⢴⣤⣶⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
