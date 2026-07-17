@@ -2,57 +2,43 @@ import java.io.*;
 import java.util.*;
 
 /**
- * A_Array
+ * B_Minimum_Product
  */
-public class A_Array {
+public class B_Minimum_Product {
 
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
         PrintWriter out = new PrintWriter(System.out);
 
-        int n = fr.nextInt();
+        int tt = fr.nextInt();
 
-        int[] arr = new int[n];
-        ArrayList<Integer> left = new ArrayList<>();
-        ArrayList<Integer> middle = new ArrayList<>();
-        ArrayList<Integer> right = new ArrayList<>();
-        
-        int neg = 0;
+        while (tt-- > 0) {
+            long a = fr.nextLong();
+            long b = fr.nextLong();
+            long x = fr.nextLong();
+            long y = fr.nextLong();
+            long n = fr.nextLong();
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = fr.nextInt();
+            long res = Long.MAX_VALUE;
+            long temp = n;
 
-            if (arr[i] < 0 && left.size() == 0) {
-                left.add(arr[i]);
-                neg++;
-            } else if (arr[i] != 0) {
-                middle.add(arr[i]);
-            }
-        }
+            long min = Math.min(a - x, n);
 
-        right.add(0);
+            long rem = Math.min(temp - min, b - y);
 
-        out.print(left.size() + " ");
-        for (int x : left) {
-            out.print(x + " ");
-        }
+            res = Math.min(res, (a - min) * (b - rem));
 
-        out.println();
+            min = Math.min(b - y, n);
 
-        out.print(middle.size() + " ");
-        for (int x : middle) {
-            out.print(x + " ");
-        }
+            rem = Math.min(temp - min, a - x);
 
-        out.println();
+            res = Math.min(res, (a - rem) * (b - min));
 
-        out.print(right.size() + " ");
-        for (int x : right) {
-            out.print(x + " ");
+            out.println(res);
+
         }
 
         out.flush();
-
     }
 }
 

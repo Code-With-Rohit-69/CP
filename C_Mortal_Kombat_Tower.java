@@ -2,57 +2,118 @@ import java.io.*;
 import java.util.*;
 
 /**
- * A_Array
+ * C_Mortal_Kombat_Tower
  */
-public class A_Array {
+public class C_Mortal_Kombat_Tower {
+
+    // static int[][] memo;
+
+    // public static int solve(int[] arr, int index, int turn) {
+
+    //     if (index == arr.length) {
+    //         return 0;
+    //     }
+
+    //     if (index == arr.length - 1) {
+    //         return turn == 0 ? arr[arr.length - 1] : 0;
+    //     }
+
+    //     if (memo[index][turn] != -1) {
+    //         return memo[index][turn];
+    //     }
+
+    //     if (turn == 0) {
+    //         // friend
+
+    //         int costA = arr[index] + solve(arr, index + 1, 1);
+    //         int costB = arr[index] + arr[index + 1] + solve(arr, index + 2, 1);
+
+    //         return memo[index][turn] = Math.min(costA, costB);
+
+    //     } else {
+    //         // Me
+
+    //         int costA = solve(arr, index + 1, 0);
+    //         int costB = solve(arr, index + 2, 0);
+
+    //         return memo[index][turn] = Math.min(costA, costB);
+    //     }
+
+    // }
+
+    public static int solve(int[] arr) {
+        int n = arr.length;
+
+        int[][] dp = new int[n + 1][2];
+
+        dp[n - 1][0] = arr[n - 1];
+        dp[n - 1][1] = 0;
+
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j < 2; j++) {
+
+                if (j == 0) {
+                    int costA = arr[i] + dp[i + 1][1];
+                    int costB = arr[i] + arr[i + 1] + dp[i + 2][1];
+
+                    dp[i][j] = Math.min(costA, costB);
+                } else {
+                    int costA = dp[i + 1][0];
+                    int costB = dp[i + 2][0];
+
+                    dp[i][j] = Math.min(costA, costB);
+                }
+            }
+        }
+
+        return dp[0][0];
+    }
 
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
         PrintWriter out = new PrintWriter(System.out);
 
-        int n = fr.nextInt();
+        int tt = fr.nextInt();
 
-        int[] arr = new int[n];
-        ArrayList<Integer> left = new ArrayList<>();
-        ArrayList<Integer> middle = new ArrayList<>();
-        ArrayList<Integer> right = new ArrayList<>();
-        
-        int neg = 0;
+        while (tt-- > 0) {
+            int n = fr.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = fr.nextInt();
+            int[] arr = new int[n];
 
-            if (arr[i] < 0 && left.size() == 0) {
-                left.add(arr[i]);
-                neg++;
-            } else if (arr[i] != 0) {
-                middle.add(arr[i]);
+            for (int i = 0; i < n; i++) {
+                arr[i] = fr.nextInt();
             }
-        }
 
-        right.add(0);
+            // memo = new int[n][2];
 
-        out.print(left.size() + " ");
-        for (int x : left) {
-            out.print(x + " ");
-        }
+            // for (int[] X : memo) {
+            //     Arrays.fill(X, -1);
+            // }
 
-        out.println();
+            // int skip = 0;
 
-        out.print(middle.size() + " ");
-        for (int x : middle) {
-            out.print(x + " ");
-        }
+            // int index = 0;
 
-        out.println();
+            // while (index < n) {
+            // if (arr[index] == 1) {
+            // skip++;
 
-        out.print(right.size() + " ");
-        for (int x : right) {
-            out.print(x + " ");
+            // if (index + 1 < n && arr[index + 1] == 0) {
+            // index++;
+            // }
+            // }
+
+            // index += 3;
+            // }
+
+            // int skip = solve(arr, 0, 0);
+            int skip = solve(arr);
+
+            out.println(skip);
+
         }
 
         out.flush();
-
     }
 }
 
