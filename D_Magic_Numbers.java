@@ -17,7 +17,6 @@ public class D_Magic_Numbers {
             return memo[pos][rem];
 
         int limit = tight == 1 ? s.charAt(pos) - '0' : 9;
-
         long ans = 0;
 
         if ((pos & 1) == 1) {
