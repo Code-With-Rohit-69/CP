@@ -12,16 +12,16 @@ public class A_Black_Square {
 
         String s = sc.next();
 
-        long calories = 0;
+        long c = 0;
 
         for (char ch : s.toCharArray()) {
-            if(ch == '1') calories += a1;
-            if(ch == '2') calories += a2;
-            if(ch == '3') calories += a3;
-            if(ch == '4') calories += a4;
+            if(ch == '1') c += a1;
+            if(ch == '2') c += a2;
+            if(ch == '3') c += a3;
+            if(ch == '4') c += a4;
         }
 
-        System.out.println(calories);
+        System.out.println(c);
 
         sc.close();
 
