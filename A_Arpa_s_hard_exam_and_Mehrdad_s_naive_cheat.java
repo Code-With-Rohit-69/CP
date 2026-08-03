@@ -10,15 +10,15 @@ public class A_Arpa_s_hard_exam_and_Mehrdad_s_naive_cheat {
         if (n == 0) {
             System.out.println(1);
         } else {
-            int remainder = n % 4;
+            int rem = n % 4;
 
-            if (remainder == 1) {
+            if (rem == 1) {
                 System.out.println(8);
-            } else if (remainder == 2) {
+            } else if (rem == 2) {
                 System.out.println(4);
-            } else if (remainder == 3) {
+            } else if (rem == 3) {
                 System.out.println(2);
-            } else if (remainder == 0) {
+            } else if (rem == 0) {
                 System.out.println(6);
             }
         }
