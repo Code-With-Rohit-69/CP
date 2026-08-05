@@ -13,27 +13,27 @@ public class D_Distinct_Split {
 
             String s = sc.next();
             
-            int[] left = new int[n];
-            int[] right = new int[n];
+            int[] l = new int[n];
+            int[] r = new int[n];
             
             HashSet<Character> set = new HashSet<>();
 
             for (int i = 0; i < n; i++) {
                 set.add(s.charAt(i));
-                left[i] = set.size();
+                l[i] = set.size();
             }
 
             set = new HashSet<>();
 
             for (int i = n - 1; i >= 0; i--) {
                 set.add(s.charAt(i));
-                right[i] = set.size();
+                r[i] = set.size();
             }
 
             int max = 0;
 
             for (int i = 0; i < n - 1; i++) {
-                max = Math.max(max, left[i] + right[i + 1]);
+                max = Math.max(max, l[i] + r[i + 1]);
             }
 
             System.out.println(max);
