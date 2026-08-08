@@ -16,13 +16,13 @@ public class C_Raspberries {
             int[] arr = new int[n];
             // long product = 1L;
 
-            int evens = 0;
+            int e = 0;
             int fives = 0;
 
             for (int i = 0; i < n; i++) {
                 arr[i] = fr.nextInt();
                 if ((arr[i] & 1) == 0)
-                    evens++;
+                    e++;
                 if (arr[i] % 5 == 0)
                     fives++;
 
@@ -30,7 +30,7 @@ public class C_Raspberries {
             }
 
             if (k == 2) {
-                out.println(evens > 0 ? 0 : 1);
+                out.println(e > 0 ? 0 : 1);
                 continue;
             }
 
@@ -71,10 +71,10 @@ public class C_Raspberries {
                     min = Math.min(min, (4 - (arr[i] % 4)) % 4);
                 }
 
-                if (evens >= 2) {
+                if (e >= 2) {
                     out.println(0);
                     continue;
-                } else if (evens == 1) {
+                } else if (e == 1) {
                     min = Math.min(1, min);
                 } else {
                     min = Math.min(2, min);
