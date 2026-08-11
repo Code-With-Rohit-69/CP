@@ -22,10 +22,10 @@ public class B_Evanescent {
             int res = count;
 
             for (int i = 1; i < n - 1; i++) {
-                char left = s.charAt(i - 1), mid = s.charAt(i), right = s.charAt(i + 1);
+                char l = s.charAt(i - 1), mid = s.charAt(i), right = s.charAt(i + 1);
 
-                int old = (left != mid ? 1 : 0) + (right != mid ? 1 : 0);
-                int New = (left != right) ? 1 : 0;
+                int old = (l != mid ? 1 : 0) + (right != mid ? 1 : 0);
+                int New = (l != right) ? 1 : 0;
 
                 res = Math.min(res, count - old + New);
 
