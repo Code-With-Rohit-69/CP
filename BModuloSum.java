@@ -6,14 +6,78 @@ import java.util.*;
  */
 public class BModuloSum {
 
-    public static boolean dfs(int[] arr, int index, int m, long sum) {
-        if (index == arr.length) {
-            return sum % m == 0;
+    // static int[][] memo;
+
+    // public static boolean dfs(int[] arr, int index, int m, int rem, int picked) {
+    //     if (rem == 0 && picked == 1) {
+    //         return true;
+    //     }
+
+    //     if (index == arr.length) {
+    //         return false;
+    //     }
+
+    //     if (picked == 1 && memo[index][rem] != -1) {
+    //         return memo[index][rem] == 1;
+    //     }
+
+    //     boolean skip = dfs(arr, index + 1, m, rem, picked);
+
+    //     if (skip) {
+    //         return true;
+    //     }
+
+    //     int newRem = ((rem + arr[index] % m) + m) % m;
+    //     boolean take = dfs(arr, index + 1, m, newRem, 1);
+
+    //     boolean ans = take;
+
+    //     if (picked == 1) {
+    //         memo[index][rem] = ans ? 1 : 0;
+    //     }
+
+    //     return ans;
+
+    // }
+
+    public static boolean tabulation(int[] nums, int m) {
+        int n = nums.length;
+
+        if (n >= m) return true;
+
+        int[][][] dp = new int[n + 1][m][2]; // len, rem, picked or not
+
+        for (int i = 0; i <= n; i++) {
+            dp[i][0][1] = 1;
         }
 
-        if (sum % m == 0) {
-            return true;
+        for(int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j < m; j++) {
+                for (int k = 0; k < 2; k++) {
+                    if (j == 0 && k == 1) {
+                        dp[i][j][k] = 1;
+                        continue;
+                    }
+
+                    int skip = dp[i + 1][j][k];
+
+                    if (skip == 1) {
+                        dp[i][j][k] = 1;
+                        continue;
+                    }
+
+                    int newRem = ((j + nums[i] % m) + m) % m;
+                    int take = dp[i + 1][newRem][1];
+
+                    if (take == 1) {
+                        dp[i][j][k] = 1;
+                    }
+
+                }
+            }
         }
+
+        return dp[0][0][0] == 1;
 
     }
 
@@ -29,7 +93,13 @@ public class BModuloSum {
             arr[i] = fr.nextInt();
         }
 
-        boolean res = dfs(arr, 0, m, 0L);
+        // memo = new int[n + 1][m + 1];
+
+        // for(int[] A : memo) Arrays.fill(A, -1);
+
+        // boolean res = dfs(arr, 0, m, 0, 0);
+
+        boolean res = tabulation(arr, m);
 
         System.out.println(res ? "YES" : "NO");
 
