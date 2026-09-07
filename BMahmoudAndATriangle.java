@@ -2,41 +2,35 @@ import java.io.*;
 import java.util.*;
 
 /**
- * AMooLanguageSchool
+ * BMahmoudAndATriangle
  */
-public class AMooLanguageSchool {
+public class BMahmoudAndATriangle {
 
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
-        StringBuilder out = new StringBuilder();
 
-        int t = fr.nextInt();
+        int n = fr.nextInt();
 
-        while (t-- > 0) {
-            int n = fr.nextInt();
-            int k = fr.nextInt();
+        int[] arr = new int[n];
 
-            String s = fr.next();
-
-            int count = 0;
-            
-            int f = n / k;
-            int index = 0;
-
-            while (f-- > 0) {
-                String substr = s.substring(index, index + k);
-
-                if (!substr.contains("0")) {
-                    count++;
-                }
-
-                index += k;
-            }
-
-            out.append(count + "\n");
+        for (int i = 0; i < n; i++) {
+            arr[i] = fr.nextInt();
         }
 
-        System.out.println(out);
+        Arrays.sort(arr);
+
+        boolean valid = false;
+
+        for (int i = 0; i < n - 2; i++) {
+            int a = arr[i], b = arr[i + 1], c = arr[i + 2];
+
+            if (a + b > c && b + c > a && a + c > b) {
+                valid = true;
+                break;
+            }
+        }
+
+        System.out.println(valid ? "YES" : "NO");
 
     }
 }
