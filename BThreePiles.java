@@ -2,49 +2,26 @@ import java.io.*;
 import java.util.*;
 
 /**
- * CTableDecorations
+ * BThreePiles
  */
-
-public class CTableDecorations {
+public class BThreePiles {
 
     public static void main(String[] args) throws IOException {
         FastReader fr = new FastReader();
 
-        long[] arr = new long[3];
+        int t = fr.nextInt();
+        StringBuilder out = new StringBuilder();
 
-        for (int i = 0; i < 3; i++) {
-            arr[i] = fr.nextLong();
+        while(t-- > 0) {
+            long a = fr.nextLong();
+            long b = fr.nextLong();
+            long c = fr.nextLong();
+
+            out.append(Math.max(Math.abs((a + c) - b), Math.abs(a - b)) + "\n");
+
         }
 
-        Arrays.sort(arr);
-
-        int count = 0;
-
-        for (long x : arr) {
-            if (x == 0)
-                count++;
-        }
-
-        if (count == 3 || count == 2) {
-            System.out.println(0);
-        } else if (count == 1) {
-            long b = arr[1];
-            long c = arr[2];
-            if (c > 2 * b) {
-                c = 2 * b;
-            }
-            System.out.println((b + c) / 3);
-        } else {
-            long a = arr[0];
-            long b = arr[1];
-            long c = arr[2];
-
-            if (c > 2 * (a + b)) {
-                System.out.println(a + b);
-            } else {
-                System.out.println((a + b + c) / 3);
-            }
-        }
+        System.out.println(out);
 
     }
 }
@@ -67,8 +44,7 @@ class FastReader {
     int nextInt() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1)
-                return -1;
+            if (c == -1) return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -86,8 +62,7 @@ class FastReader {
     long nextLong() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1)
-                return -1;
+            if (c == -1) return -1;
         }
         int sign = 1;
         if (c == '-') {
@@ -105,8 +80,7 @@ class FastReader {
     String next() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1)
-                return null;
+            if (c == -1) return null;
         }
         StringBuilder sb = new StringBuilder();
         while (c > ' ') {
@@ -119,8 +93,7 @@ class FastReader {
     double nextDouble() throws IOException {
         int c;
         while ((c = read()) <= ' ') {
-            if (c == -1)
-                return -1;
+            if (c == -1) return -1;
         }
         int sign = 1;
         if (c == '-') {
