@@ -15,18 +15,30 @@ public class CMathAndPhysics {
         while(t-- > 0) {
             int n = fr.nextInt();
 
-            long sum = 0;
-            boolean ok = false;
-
+            int[] A = new int[n];
             for(int i = 0; i < n; i++) {
-                int x = fr.nextInt();
-                sum += x;
-
-                if(x >= 2) ok = true;
+                A[i] = fr.nextInt();
             }
 
-            if(!ok) {
+            int max = Arrays.stream(A).max().getAsInt();
+            if(max == 1) {
                 out.append("-1\n");
+                continue;
+            }
+
+            boolean ok = false;
+
+            for(int i = 1; i < n - 1; i++) {
+                if(A[i] > 1) {
+                    ok = true;
+                    break;
+                }
+            }
+
+            int sum = Arrays.stream(A).sum();
+
+            if(n == 2 || !ok) {
+                out.append(sum - (n - 1)).append("\n");
             } else {
                 out.append(sum - 1).append("\n");
             }
