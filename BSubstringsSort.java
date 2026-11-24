@@ -16,23 +16,16 @@ public class BSubstringsSort {
 
         Arrays.sort(A, (a, b) -> a.length() - b.length());
 
-        for(int i = 0; i < n - 1; i++) {
+        for(int i = 0; i < n; i++) {
             String s = A[i];
-            boolean valid = false;
 
-            for(int j = i + 1; j < n; j++) {
+            for(int j = 0; j < i; j++) {
                 String t = A[j];
 
-                if(t.contains(s)) {
-                    valid = true;
-                    break;
+                if(!s.contains(t)) {
+                    System.out.println("NO");
+                    return;
                 }
-
-            }
-
-            if(!valid) {
-                System.out.println("NO");
-                return;
             }
         }
 
@@ -41,6 +34,7 @@ public class BSubstringsSort {
         for(int i = 0; i < n; i++) {
             System.out.println(A[i]);
         }
+
 
     }
 }
